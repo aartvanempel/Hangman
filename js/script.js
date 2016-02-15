@@ -4,8 +4,8 @@ $(document).ready(function() {
   var word;
   var letters;
   var guessedLetters = [];
-  var guessCount = 3;
-  $(".guess-count span").text(guessCount);
+  var guessesLeft = 1;
+  $(".guess-count span").text(guessesLeft);
 
   // type een woord om te beginnen
   $(".word-input").keyup(function() {
@@ -17,7 +17,8 @@ $(document).ready(function() {
   });
 
   // klik op start
-  $(".start").click(function() {
+  $(".start").click(function(e) {
+    e.preventDefault();
     word = $(".word-input").val();
     letters = word.split("");
 
@@ -50,15 +51,11 @@ $(document).ready(function() {
   });
 
   // raad een letter
-  $(".guess").click(function() {
+  $(".guess").click(function(e) {
+    e.preventDefault();
 
-    // game over
-    if (guessCount <= 1) {
-      $(".guess-count").text("Je hebt verloren!");
-      $(".game-over").addClass("message-active");
-      $(".game-over h2 span").text(word);
     // als je een letter al geprobeerd hebt
-    } else if ($.inArray($(".guess-input").val(), guessedLetters) != -1) {
+    if ($.inArray($(".guess-input").val(), guessedLetters) != -1) {
       $(".already-guessed-letters").addClass("message-active");
     // als de geraden letter in het woord zit
     } else if ($.inArray($(".guess-input").val(), letters) != -1) {
@@ -68,31 +65,44 @@ $(document).ready(function() {
           letterIndex.push(index);
         }
       });
+      // laat de letter zien op de juiste positie
       $.each(letterIndex, function(index, value) {
         $(".star:eq("+ value +")").text($(".guess-input").val()).addClass("correct-letter");
       });
       guessedLetters.push($(".guess-input").val());
       // als je het woord hebt geraden
       if ($(".star").text() == word) {
+        $(".guess-count").text("Je hebt gewonnen!");
         $(".guessed-word h1").text("Jaa het woord is " + word + "!");
         $(".guessed-word").addClass("message-active");
       }
     // als je een foute letter raadt
     } else {
-      if (guessCount > 0) {
-        guessCount--;
+        guessesLeft--;
+      if (guessesLeft == 0) {
+        gameOver();
       }
       $(".wrong").addClass("wrong-active");
       $("<span class='wrong-letter'>"+ $(".guess-input").val() +"</span>").appendTo(".wrong");
       guessedLetters.push($(".guess-input").val());
       //
-      $(".guess-count span").text(guessCount);
+      $(".guess-count span").text(guessesLeft);
     }
   });
 
   // klik het message scherm weg
   $(".message").click(function() {
     $(this).removeClass("message-active");
+    $(".restart").addClass("button-active animated tada");
   });
+
+  // game over screen
+  function gameOver() {
+    $(".guess-count").text("Je hebt verloren!");
+    $(".game-over").addClass("message-active");
+    $(".game-over h2 span").text(word);
+    $(".game-over h2").addClass("animated bounceInDown");
+    $(".game").remove();
+  }
 
 }); // ready
