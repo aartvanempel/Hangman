@@ -8,6 +8,7 @@ $(document).ready(function() {
   $(".guess-count span").text(guessesLeft);
 
   // type een woord om te beginnen
+  $(".word-input").focus();
   $(".word-input").keyup(function() {
     if (!$(".word-input").val()) {
       $(".start").removeClass("button-active");
@@ -53,7 +54,8 @@ $(document).ready(function() {
   // raad een letter
   $(".guess").click(function(e) {
     e.preventDefault();
-
+    //
+    $(".guess-input").focus();
     // als je een letter al geprobeerd hebt
     if ($.inArray($(".guess-input").val(), guessedLetters) != -1) {
       $(".already-guessed-letters").addClass("message-active");
@@ -96,6 +98,8 @@ $(document).ready(function() {
     if (!$(this).hasClass("already-guessed-letters")) {
       $(".game").remove();
       $(".restart").addClass("button-active animated tada");
+    } else {
+      $(".guess-input").focus();
     }
   });
 
