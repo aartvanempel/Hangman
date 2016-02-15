@@ -20,7 +20,7 @@
 	<div class="game">
 		<div class="guess-caption">
 			<h2>Wat is het woord?</h2>
-			<!-- <p>Je mag 7 keer raden.</p> -->
+			<p class="guess-count">Je mag nog <strong><span></span></strong> keer raden.</p>
 		</div>
 		<div class="stars"></div>
 		<input class="guess-input" type="text" name="name" value="" placeholder="vul een letter in" maxlength="1">
@@ -29,10 +29,17 @@
 			<h2>Foute letter(s):</h2>
 		</div>
 		<div class="message already-guessed-letters">
+			<img src="http://emojipedia-us.s3.amazonaws.com/cache/45/99/4599951f963380afc847d357adc68ace.png" alt="try again">
 			<h1>Deze letter heb je al geprobeerd!</h1>
 		</div>
 		<div class="message guessed-word">
+			<img src="http://emojipedia-us.s3.amazonaws.com/cache/02/e5/02e5e081415497b60674649cfd1fc12d.png" alt="win">
 			<h1></h1>
+		</div>
+		<div class="message game-over">
+			<img src="http://emojipedia-us.s3.amazonaws.com/cache/85/55/8555c0e168b8c69a527b7a337f5f7260.png" alt="cry">
+			<h1>GAME OVER</h1>
+			<h2>Het woord was <span></span>.</h2>
 		</div>
 	</div>
 </body>
