@@ -8,6 +8,7 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+  text-align: center;
 }
 
 body h1 {
@@ -81,14 +82,14 @@ input {
 }
 
 .game .guess-caption {
-  margin-bottom: 1.5rem;
+  margin-bottom: .5rem;
   display: none;
   color: #34495e;
 }
 
 .game .guess-input {
   width: 12.5em;
-  margin-top: 1rem;
+  margin: 1.5rem auto;
   display: none;
 }
 
@@ -126,16 +127,24 @@ input {
 }
 
 .game .wrong {
+  position: relative;
+  top: -4rem;
   margin-top: 2rem;
-}
-
-.game .wrong .wrong-caption {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
 }
 
 .game .wrong .wrong-letter {
   margin: 2em .5em;
   color: tomato;
+}
+
+.game .wrong-active {
+  opacity: 1;
+  top: -1.5rem;
+  transition: all .35s ease-in-out;
+  pointer-events: auto;
 }
 
 .game .message {
@@ -161,6 +170,7 @@ input {
 .game .message h1 {
   color: #fff;
   font-weight: 100;
+  text-align: center;
 }
 
 .game .message-active {

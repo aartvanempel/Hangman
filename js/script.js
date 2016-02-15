@@ -69,9 +69,9 @@ $(document).ready(function() {
         $(".guessed-word h1").text("Jaa het woord is " + word + "!!");
         $(".guessed-word").addClass("message-active");
       }
-    // als de geraden letter niet in het woord zit
+    // als je een foute letter raadt
     } else {
-      $(".wrong-caption").show();
+      $(".wrong").addClass("wrong-active");
       $("<span class='wrong-letter'>"+ $(".guess-input").val() +"</span>").appendTo(".wrong");
       guessedLetters.push($(".guess-input").val());
     }
