@@ -4,7 +4,7 @@ $(document).ready(function() {
   var word;
   var letters;
   var guessedLetters = [];
-  var guessesLeft = 1;
+  var guessesLeft = 7;
   $(".guess-count span").text(guessesLeft);
 
   // type een woord om te beginnen
