@@ -93,7 +93,10 @@ $(document).ready(function() {
   // klik het message scherm weg
   $(".message").click(function() {
     $(this).removeClass("message-active");
-    $(".restart").addClass("button-active animated tada");
+    if (!$(this).hasClass("already-guessed-letters")) {
+      $(".game").remove();
+      $(".restart").addClass("button-active animated tada");
+    }
   });
 
   // game over screen
@@ -102,7 +105,6 @@ $(document).ready(function() {
     $(".game-over").addClass("message-active");
     $(".game-over h2 span").text(word);
     $(".game-over h2").addClass("animated bounceInDown");
-    $(".game").remove();
   }
 
 }); // ready
