@@ -169,7 +169,7 @@ input {
 }
 
 .game .already-guessed-letters {
-  background-color: tomato;
+  background-color: #34495e;
 }
 
 .game .guessed-word {
