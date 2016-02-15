@@ -3,6 +3,7 @@ $(document).ready(function() {
   // globale variabelen
   var word;
   var letters;
+  var guessedLetters = [];
 
   // type een woord om te beginnen
   $(".word-input").keyup(function() {
@@ -47,8 +48,11 @@ $(document).ready(function() {
 
   // raad een letter
   $(".guess").click(function() {
+    // als je een letter al geprobeerd hebt
+    if ($.inArray($(".guess-input").val(), guessedLetters) != -1) {
+      alert("deze letter heb je al geraden");
     // als de geraden letter in het woord zit
-    if ($.inArray($(".guess-input").val(), letters) != -1) {
+    } else if ($.inArray($(".guess-input").val(), letters) != -1) {
       var letterIndex = [];
       $.each(letters, function(index, value) {
         if ( value == $(".guess-input").val() ) {
@@ -58,10 +62,12 @@ $(document).ready(function() {
       $.each(letterIndex, function(index, value) {
         $(".star:eq("+ value +")").text($(".guess-input").val()).addClass("correct-letter");
       });
-      // als de geraden letter niet in het woord zit
+      guessedLetters.push($(".guess-input").val());
+    // als de geraden letter niet in het woord zit
     } else {
       $(".wrong-caption").show();
       $("<span class='wrong-letter'>"+ $(".guess-input").val() +"</span>").appendTo(".wrong");
+      guessedLetters.push($(".guess-input").val());
     }
   });
 
