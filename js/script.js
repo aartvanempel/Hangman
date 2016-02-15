@@ -48,14 +48,15 @@ $(document).ready(function() {
 
   // raad een letter
   $(".guess").click(function() {
+
     // als je een letter al geprobeerd hebt
     if ($.inArray($(".guess-input").val(), guessedLetters) != -1) {
-      alert("deze letter heb je al geraden");
+      $(".already-guessed-letters").addClass("message-active");
     // als de geraden letter in het woord zit
     } else if ($.inArray($(".guess-input").val(), letters) != -1) {
       var letterIndex = [];
       $.each(letters, function(index, value) {
-        if ( value == $(".guess-input").val() ) {
+        if (value == $(".guess-input").val()) {
           letterIndex.push(index);
         }
       });
@@ -63,12 +64,22 @@ $(document).ready(function() {
         $(".star:eq("+ value +")").text($(".guess-input").val()).addClass("correct-letter");
       });
       guessedLetters.push($(".guess-input").val());
+      // als je het woord hebt geraden
+      if ($(".star").text() == word) {
+        $(".guessed-word h1").text("Jaa het woord is " + word + "!!");
+        $(".guessed-word").addClass("message-active");
+      }
     // als de geraden letter niet in het woord zit
     } else {
       $(".wrong-caption").show();
       $("<span class='wrong-letter'>"+ $(".guess-input").val() +"</span>").appendTo(".wrong");
       guessedLetters.push($(".guess-input").val());
     }
+  });
+
+  // klik het message scherm weg
+  $(".message").click(function() {
+    $(this).removeClass("message-active");
   });
 
 }); // ready
